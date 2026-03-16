@@ -4,657 +4,545 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fast Loan Advance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --green-600: #2e7d32;
+      --green-500: #3a9e3f;
+      --green-50: #f0faf0;
+      --amber-600: #d97706;
+      --amber-50: #fffbeb;
+      --amber-100: #fef3c7;
+      --gray-900: #111;
+      --gray-600: #555;
+      --gray-400: #999;
+      --gray-200: #e5e5e5;
+      --gray-100: #f5f5f5;
+      --gray-50: #fafafa;
+      --white: #fff;
+      --radius: 10px;
+      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
     }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background: #f5f5f5;
-      color: #333;
+      font-family: var(--font-body);
+      background: var(--gray-100);
+      color: var(--gray-900);
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Top green bar */
-    .top-bar {
-      height: 6px;
-      background: linear-gradient(90deg, #2e7d32, #4caf50);
-      width: 100%;
+    /* ── Progress bar ── */
+    .progress-bar {
+      height: 4px;
+      background: var(--gray-200);
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 80%;
+      background: var(--green-500);
+      border-radius: 0 2px 2px 0;
     }
 
+    /* ── Container ── */
     .container {
-      max-width: 540px;
+      max-width: 480px;
       margin: 0 auto;
-      background: #fff;
-      min-height: calc(100vh - 6px);
-      padding: 24px 20px 40px;
-      text-align: center;
+      background: var(--white);
+      min-height: calc(100vh - 4px);
+      padding: 20px 20px 32px;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* Logo */
+    /* ── Logo ── */
     .logo {
-      margin-bottom: 20px;
-    }
-
-    .logo svg {
-      height: 44px;
-    }
-
-    .logo-text {
-      display: inline-flex;
-      align-items: center;
-      gap: 2px;
-    }
-
-    .logo-fast {
-      font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
-      font-weight: 900;
-      font-size: 28px;
-      color: #333;
-      letter-spacing: 1px;
-    }
-
-    .logo-leaf {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 1px;
-    }
-
-    .logo-loan {
-      font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
-      font-weight: 900;
-      font-size: 28px;
-      color: #333;
-      letter-spacing: 1px;
-    }
-
-    .logo-advance {
-      display: block;
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: 400;
-      font-size: 14px;
-      color: #666;
-      letter-spacing: 6px;
-      text-transform: uppercase;
-      margin-top: -2px;
-    }
-
-    /* Heading */
-    .heading {
-      font-size: 28px;
-      font-weight: 700;
-      color: #222;
-      margin-bottom: 10px;
-      line-height: 1.2;
-    }
-
-    /* Subtext */
-    .subtext {
-      font-size: 15px;
-      color: #555;
-      line-height: 1.5;
-      margin-bottom: 20px;
-      max-width: 420px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* CTA Button */
-    .cta-button {
-      display: block;
-      width: 100%;
-      padding: 18px 24px;
-      background: #4caf50;
-      color: #fff;
-      font-size: 18px;
-      font-weight: 600;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.2s ease, transform 0.1s ease;
-      letter-spacing: 0.5px;
+      text-align: center;
       margin-bottom: 24px;
-      text-decoration: none;
+    }
+    .logo-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 1px;
+    }
+    .logo-word {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--gray-900);
+      letter-spacing: 0.5px;
+    }
+    .logo-sub {
+      display: block;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--gray-400);
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: -1px;
     }
 
-    .cta-button:hover {
-      background: #43a047;
-      transform: translateY(-1px);
-    }
-
-    .cta-button:active {
-      transform: translateY(0);
-    }
-
-    /* Disclaimer */
-    .disclaimer {
-      font-size: 12.5px;
-      color: #666;
-      line-height: 1.7;
-      text-align: left;
-      padding: 0 4px;
-    }
-
-    .disclaimer a {
-      color: #2e7d32;
-      text-decoration: underline;
-    }
-
-    .disclaimer a:hover {
-      color: #1b5e20;
-    }
-
-    /* Decorative dots */
-    .deco-dot {
-      position: absolute;
-      border-radius: 50%;
-    }
-
-    /* Bank Warning Banner */
-    .bank-warning {
-      background: #fff8e1;
-      border: 1px solid #ffe082;
-      border-left: 4px solid #ffa000;
-      border-radius: 8px;
-      padding: 16px 18px;
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
       margin-bottom: 20px;
-      text-align: left;
     }
-
-    .bank-warning-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .bank-warning-icon {
-      flex-shrink: 0;
-      width: 22px;
-      height: 22px;
-      background: #ffa000;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-weight: 700;
-      font-size: 14px;
-      line-height: 1;
-    }
-
-    .bank-warning-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #e65100;
-    }
-
-    .bank-warning-body {
-      font-size: 13.5px;
-      color: #555;
-      line-height: 1.6;
-      margin-bottom: 12px;
-    }
-
-    .bank-warning-body strong {
-      color: #333;
-    }
-
-    .bank-warning-cta {
+    .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      background: var(--green-50);
+      color: var(--green-600);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+    }
+    .hero-badge svg { flex-shrink: 0; }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+    }
+    .hero p {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+
+    /* ── Bank nudge ── */
+    .bank-nudge {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: var(--amber-50);
+      border: 1px solid var(--amber-100);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+    .bank-nudge-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      margin-top: 1px;
+    }
+    .bank-nudge-content { flex: 1; min-width: 0; }
+    .bank-nudge-text {
+      font-size: 14px;
+      color: var(--gray-900);
+      line-height: 1.45;
+      margin-bottom: 6px;
+    }
+    .bank-nudge-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       background: none;
       border: none;
-      color: #2e7d32;
+      font-family: var(--font-body);
       font-size: 14px;
       font-weight: 600;
+      color: var(--green-600);
       cursor: pointer;
-      padding: 6px 0;
-      transition: color 0.15s;
+      padding: 0;
     }
-
-    .bank-warning-cta:hover {
-      color: #1b5e20;
-      text-decoration: underline;
+    .bank-nudge-link:hover { text-decoration: underline; }
+    .bank-nudge-link svg {
+      transition: transform 0.15s ease;
     }
-
-    .bank-warning-cta svg {
-      transition: transform 0.15s;
-    }
-
-    .bank-warning-cta:hover svg {
+    .bank-nudge-link:hover svg {
       transform: translateX(2px);
     }
 
-    /* Modal Overlay */
-    .modal-overlay {
+    /* ── Success state ── */
+    .bank-nudge.success {
+      background: var(--green-50);
+      border-color: #c8e6c9;
+    }
+    .bank-nudge.success .bank-nudge-text {
+      margin-bottom: 0;
+    }
+
+    /* ── CTA ── */
+    .cta {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: var(--green-500);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.15s ease;
+      margin-bottom: 16px;
+    }
+    .cta:hover { background: var(--green-600); }
+    .cta:active { transform: scale(0.99); }
+
+    /* ── Legal ── */
+    .legal {
+      font-size: 11px;
+      color: var(--gray-400);
+      line-height: 1.6;
+      text-align: left;
+    }
+    .legal a {
+      color: var(--gray-600);
+      text-decoration: underline;
+      text-decoration-color: var(--gray-200);
+      text-underline-offset: 2px;
+    }
+    .legal a:hover { color: var(--gray-900); }
+
+    /* ── Spacer ── */
+    .spacer { flex: 1; }
+
+    /* ═══════════════════════════════════
+       Modal
+    ═══════════════════════════════════ */
+    .overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-      align-items: center;
+      background: rgba(0,0,0,0.4);
+      z-index: 100;
+      align-items: flex-end;
       justify-content: center;
-      padding: 20px;
-      animation: fadeIn 0.2s ease;
+    }
+    .overlay.open { display: flex; }
+
+    .modal {
+      background: var(--white);
+      width: 100%;
+      max-width: 480px;
+      border-radius: 16px 16px 0 0;
+      animation: slideUp 0.25s cubic-bezier(0, 0, 0.2, 1);
+      max-height: 92vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
-    .modal-overlay.active {
-      display: flex;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    @media (min-width: 481px) {
+      .overlay { align-items: center; }
+      .modal { border-radius: 16px; }
     }
 
     @keyframes slideUp {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Modal */
-    .modal {
-      background: #fff;
-      border-radius: 12px;
-      width: 100%;
-      max-width: 460px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      animation: slideUp 0.25s ease;
-      overflow: hidden;
-    }
-
-    .modal-header {
+    .modal-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 20px 24px 16px;
-      border-bottom: 1px solid #eee;
+      padding: 20px 20px 0;
     }
-
-    .modal-header h2 {
+    .modal-head h2 {
+      font-family: var(--font-display);
       font-size: 18px;
       font-weight: 700;
-      color: #222;
     }
-
-    .modal-close {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-      color: #999;
-      font-size: 20px;
-      line-height: 1;
-      border-radius: 4px;
-      transition: background 0.15s, color 0.15s;
-    }
-
-    .modal-close:hover {
-      background: #f5f5f5;
-      color: #333;
-    }
-
-    .modal-body {
-      padding: 20px 24px 24px;
-    }
-
-    .modal-info {
-      background: #e8f5e9;
-      border-radius: 8px;
-      padding: 12px 14px;
-      font-size: 13px;
-      color: #2e7d32;
-      line-height: 1.5;
-      margin-bottom: 20px;
+    .modal-x {
+      width: 32px;
+      height: 32px;
       display: flex;
-      align-items: flex-start;
-      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      background: var(--gray-100);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      color: var(--gray-600);
+      font-size: 18px;
+      transition: background 0.15s;
     }
+    .modal-x:hover { background: var(--gray-200); }
 
-    .modal-info svg {
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
+    .modal-form { padding: 20px; }
 
-    .form-group {
-      margin-bottom: 18px;
-    }
-
-    .form-group label {
+    .field { margin-bottom: 16px; }
+    .field label {
       display: block;
       font-size: 13px;
       font-weight: 600;
-      color: #444;
+      color: var(--gray-600);
       margin-bottom: 6px;
       text-align: left;
     }
-
-    .form-group input {
+    .field input {
       width: 100%;
-      padding: 12px 14px;
-      border: 1.5px solid #ddd;
+      height: 48px;
+      padding: 0 14px;
+      border: 1.5px solid var(--gray-200);
       border-radius: 8px;
-      font-size: 15px;
-      color: #333;
-      transition: border-color 0.15s, box-shadow 0.15s;
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--gray-900);
       outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
     }
-
-    .form-group input:focus {
-      border-color: #4caf50;
-      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
+    .field input:focus {
+      border-color: var(--green-500);
+      box-shadow: 0 0 0 3px rgba(58,158,63,0.12);
     }
-
-    .form-group input::placeholder {
-      color: #bbb;
-    }
-
-    .form-hint {
-      font-size: 11.5px;
-      color: #999;
+    .field input::placeholder { color: var(--gray-400); }
+    .field-hint {
+      font-size: 12px;
+      color: var(--gray-400);
       margin-top: 4px;
       text-align: left;
     }
 
-    /* Account type toggle */
-    .account-type-group {
-      margin-bottom: 22px;
-    }
-
-    .account-type-group label {
+    /* ── Type toggle ── */
+    .type-label {
       display: block;
       font-size: 13px;
       font-weight: 600;
-      color: #444;
+      color: var(--gray-600);
       margin-bottom: 8px;
       text-align: left;
     }
-
-    .account-type-options {
+    .type-row {
       display: flex;
       gap: 10px;
+      margin-bottom: 20px;
     }
-
-    .account-type-option {
+    .type-btn {
       flex: 1;
       position: relative;
     }
-
-    .account-type-option input {
+    .type-btn input {
       position: absolute;
       opacity: 0;
       pointer-events: none;
     }
-
-    .account-type-option label {
+    .type-btn label {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 12px 16px;
-      border: 1.5px solid #ddd;
+      height: 48px;
+      border: 1.5px solid var(--gray-200);
       border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
+      font-family: var(--font-body);
+      font-size: 15px;
       font-weight: 500;
-      color: #555;
+      color: var(--gray-600);
+      cursor: pointer;
       transition: all 0.15s;
-      text-align: center;
     }
-
-    .account-type-option input:checked + label {
-      border-color: #4caf50;
-      background: #e8f5e9;
-      color: #2e7d32;
+    .type-btn input:checked + label {
+      border-color: var(--green-500);
+      background: var(--green-50);
+      color: var(--green-600);
       font-weight: 600;
     }
+    .type-btn label:hover { border-color: var(--gray-400); }
+    .type-btn input:checked + label:hover { border-color: var(--green-500); }
 
-    .account-type-option label:hover {
-      border-color: #aaa;
-    }
-
-    .account-type-option input:checked + label:hover {
-      border-color: #4caf50;
-    }
-
-    .modal-submit {
+    /* ── Modal CTA ── */
+    .modal-cta {
+      display: block;
       width: 100%;
-      padding: 14px 24px;
-      background: #4caf50;
-      color: #fff;
+      height: 52px;
+      background: var(--green-500);
+      color: var(--white);
+      font-family: var(--font-body);
       font-size: 16px;
       font-weight: 600;
       border: none;
-      border-radius: 8px;
+      border-radius: var(--radius);
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.15s;
+      margin-bottom: 14px;
     }
-
-    .modal-submit:hover {
-      background: #43a047;
-    }
-
-    .modal-submit:disabled {
-      background: #c8e6c9;
+    .modal-cta:hover { background: var(--green-600); }
+    .modal-cta:disabled {
+      background: var(--gray-200);
+      color: var(--gray-400);
       cursor: not-allowed;
     }
 
-    .modal-disclaimer {
-      font-size: 11.5px;
-      color: #666;
+    .modal-legal {
+      font-size: 11px;
+      color: var(--gray-400);
       line-height: 1.6;
-      margin-top: 14px;
       text-align: left;
     }
-
-    .modal-disclaimer a {
-      color: #2e7d32;
+    .modal-legal a {
+      color: var(--gray-600);
       text-decoration: underline;
+      text-decoration-color: var(--gray-200);
+      text-underline-offset: 2px;
     }
+    .modal-legal a:hover { color: var(--gray-900); }
 
-    .modal-disclaimer a:hover {
-      color: #1b5e20;
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      .modal { animation: none; }
+      .cta:active { transform: none; }
     }
   </style>
 </head>
 <body>
-  <div class="top-bar"></div>
+
+  <!-- Progress bar -->
+  <div class="progress-bar"><div class="progress-bar-fill"></div></div>
+
   <div class="container">
 
     <!-- Logo -->
     <div class="logo">
-      <div class="logo-text">
-        <span class="logo-fast">FAST</span>
-        <span class="logo-leaf">
-          <svg width="30" height="36" viewBox="0 0 30 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15 2C8 8 4 16 6 26C8 22 11 18 15 16C19 18 22 22 24 26C26 16 22 8 15 2Z" fill="#4caf50" stroke="#2e7d32" stroke-width="1"/>
-            <line x1="15" y1="16" x2="15" y2="34" stroke="#2e7d32" stroke-width="2"/>
-          </svg>
-        </span>
-        <span class="logo-loan">LOAN</span>
-      </div>
-      <span class="logo-advance">A D V A N C E</span>
-    </div>
-
-    <!-- Heading -->
-    <h1 class="heading">Wonderful News, Test!</h1>
-
-    <!-- Subtext -->
-    <p class="subtext">
-      We have located your file in our lending network. You're just a click away
-      from reviewing new options for your request!
-    </p>
-
-    <!-- Bank Warning Banner -->
-    <div class="bank-warning">
-      <div class="bank-warning-header">
-        <div class="bank-warning-icon">!</div>
-        <span class="bank-warning-title">Your bank may limit lending options</span>
-      </div>
-      <p class="bank-warning-body">
-        Your selected bank is not typically supported by most lenders in our network.
-        You can still proceed, but providing a traditional bank account (e.g. Chase, Bank of America, Wells Fargo)
-        will significantly improve your chances of approval.
-      </p>
-      <button class="bank-warning-cta" onclick="openModal()">
-        Update your bank account
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <div class="logo-mark">
+        <span class="logo-word">FAST</span>
+        <svg width="24" height="30" viewBox="0 0 30 36" fill="none" aria-hidden="true">
+          <path d="M15 2C8 8 4 16 6 26C8 22 11 18 15 16C19 18 22 22 24 26C26 16 22 8 15 2Z" fill="#3a9e3f" stroke="#2e7d32" stroke-width="1"/>
+          <line x1="15" y1="16" x2="15" y2="34" stroke="#2e7d32" stroke-width="2"/>
         </svg>
-      </button>
+        <span class="logo-word">LOAN</span>
+      </div>
+      <span class="logo-sub">ADVANCE</span>
     </div>
 
-    <!-- CTA Button -->
-    <a href="#" class="cta-button">Request Loan</a>
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-badge">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M4.5 7l2 2 3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Lenders available
+      </div>
+      <h1>Great news, Test!</h1>
+      <p>We found options in our lending network for you.</p>
+    </div>
 
-    <!-- Disclaimer -->
-    <p class="disclaimer">
-      By submitting, you consent to the <a href="#">Terms &amp; Conditions</a>,
-      <a href="#">Privacy Policy</a>, <a href="#">Credit Authorization</a>,
-      <a href="#">E-Consent</a> and you are providing written instructions
-      under the Fair Credit Reporting Act authorizing us and our
-      <a href="#">Network Partners</a> or authorized third parties on their
-      behalf with whom your request is shared to obtain your consumer credit
-      report, and to contact you at the information on file to receive offers
-      for financial products or services.
-    </p>
+    <!-- Bank nudge -->
+    <div class="bank-nudge" id="bankNudge">
+      <svg class="bank-nudge-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M10 6v4m0 2.5v.5" stroke="#d97706" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="10" cy="10" r="8.25" stroke="#d97706" stroke-width="1.5"/>
+      </svg>
+      <div class="bank-nudge-content">
+        <p class="bank-nudge-text">Your selected bank may limit your options. Switching to a traditional bank improves approval odds by up to 96%.</p>
+        <button type="button" class="bank-nudge-link" onclick="openModal()" aria-label="Update bank account">
+          Update bank info
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
 
+    <!-- CTA -->
+    <a href="#" class="cta">Request Loan</a>
+
+    <!-- Legal -->
+    <p class="legal">By submitting, you consent to the <a href="#">Terms & Conditions</a>, <a href="#">Privacy Policy</a>, <a href="#">Credit Authorization</a>, <a href="#">E-Consent</a> and provide written instructions under the Fair Credit Reporting Act authorizing us and our <a href="#">Network Partners</a> to obtain your consumer credit report and contact you with offers for financial products or services.</p>
+
+    <div class="spacer"></div>
   </div>
 
-  <!-- Bank Account Modal -->
-  <div class="modal-overlay" id="bankModal">
+  <!-- ── Modal ── -->
+  <div class="overlay" id="bankModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal">
-      <div class="modal-header">
-        <h2>Update Bank Account</h2>
-        <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div class="modal-head">
+        <h2 id="modalTitle">Update bank info</h2>
+        <button type="button" class="modal-x" onclick="closeModal()" aria-label="Close">&times;</button>
       </div>
-      <div class="modal-body">
-        <div class="modal-info">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <circle cx="9" cy="9" r="8" stroke="#2e7d32" stroke-width="1.5"/>
-            <path d="M9 5v4M9 11.5v.5" stroke="#2e7d32" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          <span>Using a traditional bank account gives you access to more lenders and better rates.</span>
+      <div class="modal-form">
+
+        <div class="field">
+          <label for="routingNumber">Routing number (ABA)</label>
+          <input type="text" id="routingNumber" placeholder="021000021" maxlength="9" inputmode="numeric" autocomplete="off"
+                 oninput="this.value=this.value.replace(/\D/g,''); validateForm()">
+          <p class="field-hint">9 digits — on your check or bank statement</p>
         </div>
 
-        <div class="form-group">
-          <label for="routingNumber">ABA Routing Number</label>
-          <input type="text" id="routingNumber" placeholder="e.g. 021000021" maxlength="9" inputmode="numeric"
-                 oninput="this.value = this.value.replace(/[^0-9]/g, ''); validateForm()">
-          <div class="form-hint">9-digit routing number found on your check or bank statement</div>
+        <div class="field">
+          <label for="accountNumber">Account number</label>
+          <input type="text" id="accountNumber" placeholder="123456789012" maxlength="17" inputmode="numeric" autocomplete="off"
+                 oninput="this.value=this.value.replace(/\D/g,''); validateForm()">
         </div>
 
-        <div class="form-group">
-          <label for="accountNumber">Account Number</label>
-          <input type="text" id="accountNumber" placeholder="e.g. 123456789012" maxlength="17" inputmode="numeric"
-                 oninput="this.value = this.value.replace(/[^0-9]/g, ''); validateForm()">
-          <div class="form-hint">Typically 8-17 digits</div>
-        </div>
-
-        <div class="account-type-group">
-          <label>Account Type</label>
-          <div class="account-type-options">
-            <div class="account-type-option">
-              <input type="radio" id="typeChecking" name="accountType" value="checking" onchange="validateForm()">
-              <label for="typeChecking">
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <rect x="1" y="4" width="16" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/>
-                  <line x1="1" y1="8" x2="17" y2="8" stroke="currentColor" stroke-width="1.5"/>
-                  <line x1="4" y1="12" x2="8" y2="12" stroke="currentColor" stroke-width="1.5"/>
-                </svg>
-                Checking
-              </label>
-            </div>
-            <div class="account-type-option">
-              <input type="radio" id="typeSavings" name="accountType" value="savings" onchange="validateForm()">
-              <label for="typeSavings">
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <circle cx="9" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/>
-                  <path d="M9 6v4l2.5 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-                Savings
-              </label>
-            </div>
+        <span class="type-label">Account type</span>
+        <div class="type-row">
+          <div class="type-btn">
+            <input type="radio" id="typeChecking" name="accountType" value="checking" onchange="validateForm()">
+            <label for="typeChecking">Checking</label>
+          </div>
+          <div class="type-btn">
+            <input type="radio" id="typeSavings" name="accountType" value="savings" onchange="validateForm()">
+            <label for="typeSavings">Savings</label>
           </div>
         </div>
 
-        <button class="modal-submit" id="submitBtn" disabled onclick="submitBankInfo()">
-          Update &amp; Submit
-        </button>
+        <button type="button" class="modal-cta" id="submitBtn" disabled onclick="submitBankInfo()">Update &amp; Submit</button>
 
-        <p class="modal-disclaimer">
-          By submitting, you consent to the <a href="#">Terms &amp; Conditions</a>,
-          <a href="#">Privacy Policy</a>, <a href="#">Credit Authorization</a>,
-          <a href="#">E-Consent</a> and you are providing written instructions
-          under the Fair Credit Reporting Act authorizing us and our
-          <a href="#">Network Partners</a> or authorized third parties on their
-          behalf with whom your request is shared to obtain your consumer credit
-          report, and to contact you at the information on file to receive offers
-          for financial products or services.
-        </p>
+        <p class="modal-legal">By submitting, you consent to the <a href="#">Terms & Conditions</a>, <a href="#">Privacy Policy</a>, <a href="#">Credit Authorization</a>, <a href="#">E-Consent</a> and provide written instructions under the Fair Credit Reporting Act authorizing us and our <a href="#">Network Partners</a> to obtain your consumer credit report and contact you with offers for financial products or services.</p>
       </div>
     </div>
   </div>
 
   <script>
     function openModal() {
-      document.getElementById('bankModal').classList.add('active');
+      document.getElementById('bankModal').classList.add('open');
       document.body.style.overflow = 'hidden';
+      document.getElementById('routingNumber').focus();
     }
 
     function closeModal() {
-      document.getElementById('bankModal').classList.remove('active');
+      document.getElementById('bankModal').classList.remove('open');
       document.body.style.overflow = '';
     }
 
-    // Close modal on overlay click
     document.getElementById('bankModal').addEventListener('click', function(e) {
       if (e.target === this) closeModal();
     });
 
-    // Close modal on Escape key
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closeModal();
     });
 
     function validateForm() {
-      const routing = document.getElementById('routingNumber').value;
-      const account = document.getElementById('accountNumber').value;
-      const accountType = document.querySelector('input[name="accountType"]:checked');
-      const btn = document.getElementById('submitBtn');
-
-      btn.disabled = !(routing.length === 9 && account.length >= 8 && accountType);
+      var r = document.getElementById('routingNumber').value;
+      var a = document.getElementById('accountNumber').value;
+      var t = document.querySelector('input[name="accountType"]:checked');
+      document.getElementById('submitBtn').disabled = !(r.length === 9 && a.length >= 8 && t);
     }
 
     function submitBankInfo() {
-      const routing = document.getElementById('routingNumber').value;
-      const account = document.getElementById('accountNumber').value;
-      const accountType = document.querySelector('input[name="accountType"]:checked').value;
+      var account = document.getElementById('accountNumber').value;
+      var type = document.querySelector('input[name="accountType"]:checked').value;
+      var last4 = account.slice(-4);
 
-      // POC: just log and show confirmation
-      console.log('Bank update submitted:', { routing, account: '***' + account.slice(-4), accountType });
-
-      // Update the warning banner to show success
-      const warning = document.querySelector('.bank-warning');
-      warning.style.background = '#e8f5e9';
-      warning.style.borderColor = '#a5d6a7';
-      warning.style.borderLeftColor = '#4caf50';
-      warning.innerHTML = `
-        <div class="bank-warning-header">
-          <div class="bank-warning-icon" style="background:#4caf50">&#10003;</div>
-          <span class="bank-warning-title" style="color:#2e7d32">Bank account updated!</span>
-        </div>
-        <p class="bank-warning-body">
-          Your new bank account (${accountType}, ending in ${account.slice(-4)}) has been saved.
-          You're now eligible for more lending options.
-        </p>
-      `;
+      var nudge = document.getElementById('bankNudge');
+      nudge.className = 'bank-nudge success';
+      nudge.innerHTML =
+        '<svg class="bank-nudge-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">' +
+          '<circle cx="10" cy="10" r="8.25" stroke="#2e7d32" stroke-width="1.5"/>' +
+          '<path d="M6.5 10l2.5 2.5 4.5-4.5" stroke="#2e7d32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+        '</svg>' +
+        '<div class="bank-nudge-content">' +
+          '<p class="bank-nudge-text">Bank updated — ' + type + ' account ending in ' + last4 + '.</p>' +
+        '</div>';
 
       closeModal();
     }
