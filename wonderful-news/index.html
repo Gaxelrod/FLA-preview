@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fast Loan Advance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-600: #2e7d32;
+      --green-500: #3a9e3f;
+      --green-50: #f0faf0;
+      --amber-600: #b45309;
+      --amber-500: #d97706;
+      --amber-100: #fef3c7;
+      --amber-50: #fffbeb;
+      --gray-900: #111;
+      --gray-600: #555;
+      --gray-400: #999;
+      --gray-200: #e5e5e5;
+      --gray-100: #f5f5f5;
+      --gray-50: #fafafa;
+      --white: #fff;
+      --radius: 10px;
+      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--gray-100);
+      color: var(--gray-900);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Progress bar ── */
+    .progress-bar {
+      height: 4px;
+      background: var(--gray-200);
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 80%;
+      background: var(--green-500);
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* ── Container ── */
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      background: var(--white);
+      min-height: calc(100vh - 4px);
+      padding: 20px 20px 32px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Logo ── */
+    .logo {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .logo-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 1px;
+    }
+    .logo-word {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--gray-900);
+      letter-spacing: 0.5px;
+    }
+    .logo-sub {
+      display: block;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--gray-400);
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: -1px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--gray-900);
+      margin-bottom: 12px;
+    }
+    .hero p {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.55;
+      max-width: 360px;
+      margin: 0 auto;
+    }
+
+    /* ── CTA ── */
+    .cta {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: var(--green-500);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.15s ease;
+      margin-bottom: 16px;
+    }
+    .cta:hover { background: var(--green-600); }
+    .cta:active { transform: scale(0.99); }
+
+    /* ── Legal ── */
+    .legal {
+      font-size: 11px;
+      color: var(--gray-400);
+      line-height: 1.6;
+      text-align: left;
+    }
+    .legal a {
+      color: var(--gray-600);
+      text-decoration: underline;
+      text-decoration-color: var(--gray-200);
+      text-underline-offset: 2px;
+    }
+    .legal a:hover { color: var(--gray-900); }
+
+    /* ── Review card ── */
+    .review-card {
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .review-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: var(--gray-50);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .review-header h2 {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gray-900);
+    }
+    .review-header .edit-all-btn {
+      background: none;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green-600);
+      cursor: pointer;
+      padding: 0;
+    }
+    .review-header .edit-all-btn:hover { text-decoration: underline; }
+
+    .review-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--gray-100);
+      gap: 12px;
+    }
+    .review-row:last-child { border-bottom: none; }
+    .review-row.hidden-row { display: none; }
+    .review-card.expanded .review-row.hidden-row { display: flex; }
+    .review-row-label {
+      font-size: 13px;
+      color: var(--gray-400);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .review-row-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+    .review-row-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-900);
+      text-align: right;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .review-row-value.address-val {
+      white-space: normal;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .review-row-check {
+      flex-shrink: 0;
+      color: var(--green-500);
+      display: flex;
+      align-items: center;
+    }
+    .review-row-edit {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      color: var(--gray-400);
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      transition: color 0.15s, background 0.15s;
+    }
+    .review-row-edit:hover {
+      color: var(--green-600);
+      background: var(--green-50);
+    }
+
+    /* ── Inline editing ── */
+    .review-row.editing {
+      background: var(--gray-50);
+    }
+    .review-row-input {
+      width: 100%;
+      height: 36px;
+      padding: 0 10px;
+      border: 1.5px solid var(--green-500);
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-900);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(58,158,63,0.1);
+      text-align: right;
+    }
+    .review-row-select {
+      height: 36px;
+      padding: 0 8px;
+      border: 1.5px solid var(--green-500);
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-900);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(58,158,63,0.1);
+      background: var(--white);
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+      text-align: right;
+      padding-right: 24px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 5l3 3 3-3' stroke='%23555' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+    }
+    .review-row-save {
+      background: var(--green-500);
+      border: none;
+      color: var(--white);
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+    .review-row-save:hover { background: var(--green-600); }
+
+    /* ── Edit-all mode ── */
+    .review-card.edit-all .review-row-edit { display: none; }
+    .edit-all-actions {
+      display: none;
+      padding: 12px 16px;
+      gap: 10px;
+    }
+    .review-card.edit-all .edit-all-actions { display: flex; }
+    .edit-all-actions .save-all {
+      flex: 1;
+      height: 40px;
+      background: var(--green-500);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .edit-all-actions .save-all:hover { background: var(--green-600); }
+    .edit-all-actions .cancel-all {
+      height: 40px;
+      padding: 0 16px;
+      background: none;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .edit-all-actions .cancel-all:hover { border-color: var(--gray-400); }
+
+    /* ── Bank inline editor ── */
+    .bank-edit-panel {
+      padding: 12px 16px 14px;
+      background: var(--gray-50);
+      border-bottom: 1px solid var(--gray-100);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .bank-edit-field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray-400);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .bank-edit-field input {
+      width: 100%;
+      height: 40px;
+      padding: 0 12px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-900);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .bank-edit-field input:focus {
+      border-color: var(--green-500);
+      box-shadow: 0 0 0 3px rgba(58,158,63,0.1);
+    }
+    .bank-edit-field input::placeholder { color: var(--gray-400); font-weight: 500; }
+    .bank-edit-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .bank-edit-actions .bank-save {
+      flex: 1;
+      height: 40px;
+      background: var(--green-500);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .bank-edit-actions .bank-save:hover { background: var(--green-600); }
+    .bank-edit-actions .bank-save:disabled {
+      background: var(--gray-200);
+      color: var(--gray-400);
+      cursor: not-allowed;
+    }
+    .bank-edit-actions .bank-cancel {
+      height: 40px;
+      padding: 0 14px;
+      background: none;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .bank-edit-actions .bank-cancel:hover { border-color: var(--gray-400); }
+
+    /* ── Address inline editor ── */
+    .addr-edit-panel {
+      padding: 12px 16px 14px;
+      background: var(--gray-50);
+      border-bottom: 1px solid var(--gray-100);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .addr-edit-row {
+      display: flex;
+      gap: 8px;
+    }
+    .addr-edit-row .bank-edit-field { flex: 1; min-width: 0; }
+    .addr-edit-row .bank-edit-field.small { flex: 0 0 72px; }
+
+    /* ── Inline row hint ── */
+    .review-row-hint {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      padding: 8px 16px 12px;
+      margin-top: -1px;
+      background: var(--amber-50);
+      border-bottom: 1px solid var(--amber-100);
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--amber-600);
+    }
+    .review-row-hint svg { flex-shrink: 0; margin-top: 1px; }
+    .review-row-hint a {
+      color: var(--amber-600);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      cursor: pointer;
+    }
+    .review-row-hint a:hover { color: var(--amber-500); }
+    .review-row.has-hint {
+      border-bottom-color: var(--amber-100);
+      background: var(--amber-50);
+    }
+    .review-row.has-hint .review-row-value {
+      color: var(--amber-600);
+    }
+
+    /* ── Show more toggle ── */
+    .show-more-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 10px 16px;
+      background: none;
+      border: none;
+      border-top: 1px solid var(--gray-100);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green-600);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .show-more-btn:hover { background: var(--gray-50); }
+    .show-more-btn svg {
+      transition: transform 0.2s ease;
+    }
+    .review-card.expanded .show-more-btn svg {
+      transform: rotate(180deg);
+    }
+
+    /* ── Spacer ── */
+    .spacer { flex: 1; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cta:active { transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Progress bar -->
+  <div class="progress-bar"><div class="progress-bar-fill"></div></div>
+
+  <div class="container">
+
+    <!-- Logo -->
+    <div class="logo">
+      <div class="logo-mark">
+        <span class="logo-word">FAST</span>
+        <svg width="24" height="30" viewBox="0 0 30 36" fill="none" aria-hidden="true">
+          <path d="M15 2C8 8 4 16 6 26C8 22 11 18 15 16C19 18 22 22 24 26C26 16 22 8 15 2Z" fill="#3a9e3f" stroke="#2e7d32" stroke-width="1"/>
+          <line x1="15" y1="16" x2="15" y2="34" stroke="#2e7d32" stroke-width="2"/>
+        </svg>
+        <span class="logo-word">LOAN</span>
+      </div>
+      <span class="logo-sub">ADVANCE</span>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+      <h1>Wonderful News, Test!</h1>
+      <p>We have located your file in our lending network. You're just a click away from reviewing new options for your request!</p>
+    </div>
+
+    <!-- Review card -->
+    <div class="review-card" id="reviewCard">
+      <div class="review-header">
+        <h2>Your information</h2>
+        <button type="button" class="edit-all-btn" onclick="toggleEditAll()">Edit all</button>
+      </div>
+      <div class="review-rows" id="reviewRows"></div>
+      <button type="button" class="show-more-btn" id="showMoreBtn" onclick="toggleShowMore()">
+        <span id="showMoreText">Show more</span>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="edit-all-actions">
+        <button type="button" class="cancel-all" onclick="cancelEditAll()">Cancel</button>
+        <button type="button" class="save-all" onclick="saveAll()">Save changes</button>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <a href="#" class="cta">Request Loan</a>
+
+    <!-- Legal -->
+    <p class="legal">By submitting, you consent to the <a href="#">Terms & Conditions</a>, <a href="#">Privacy Policy</a>, <a href="#">Credit Authorization</a>, <a href="#">E-Consent</a> and you are providing written instructions under the Fair Credit Reporting Act authorizing us and our <a href="#">Network Partners</a> or authorized third parties on their behalf with whom your request is shared to obtain your consumer credit report, and to contact you at the information on file to receive offers for financial products or services.</p>
+
+    <div class="spacer"></div>
+  </div>
+
+  <script>
+    // ── Raw data from funnel (as received on frontend) ──
+    var rawData = {
+      "baba": "031101279",
+      "last4bacc": "3232",
+      "email": "test@test.com",
+      "fname": "test",
+      "hpostal": "43224",
+      "hstate": "OH",
+      "ishowner": "0",
+      "netim": 3000,
+      "payfreq": 1,
+      "phhm": "4324324234",
+      "hcity": "COLUMBUS",
+      "uuid": "7ce01702-221f-11f1-9ed7-0a6654aad46f",
+      "i_ad_ccDebtAmt": 4999,
+      "bacctype": 1,
+      "priincsrc": 1,
+      "isactmil": "0",
+      "isdd": 1,
+      "hasBank": true
+    };
+
+    // ── Lookup maps for coded values ──
+    var payfreqMap   = { 1: 'Weekly', 2: 'Bi-weekly', 3: 'Semi-monthly', 4: 'Monthly' };
+    var bacctypeMap  = { 1: 'Checking', 2: 'Savings' };
+    var priincsrcMap = { 1: 'Employed', 2: 'Self-employed', 3: 'Retired', 4: 'Disability', 5: 'Military', 6: 'Other' };
+
+    function formatCurrency(n) { return '$' + Number(n).toLocaleString(); }
+
+    // ── Fintech / neobank ABA lookup ──
+    var fintechAbas = {
+      '031101279': 'Chime',
+      '103100195': 'Chime',
+      '124303120': 'Green Dot',
+      '124085024': 'Green Dot',
+      '073923033': 'Cash App',
+      '041215663': 'Cash App',
+      '091311229': 'Varo',
+      '021214891': 'Current',
+      '021000089': 'Chime',
+      '026013576': 'Dave',
+      '084106768': 'Chime',
+      '061092387': 'Varo',
+      '056009399': 'Current',
+      '121182879': 'Chime'
+    };
+
+    function getBankName(aba) {
+      return fintechAbas[aba] || null;
+    }
+
+    function isFintech(aba) {
+      return !!fintechAbas[aba];
+    }
+
+    function bankDisplayValue(aba) {
+      var name = fintechAbas[aba];
+      if (name) return name + ' (***' + aba.slice(-4) + ')';
+      return 'Bank (***' + aba.slice(-4) + ')';
+    }
+
+    // ── Address helpers ──
+    // We don't have address line 1, store it locally if user provides one
+    var haddr1 = '';
+
+    function addressDisplayValue() {
+      var street = haddr1 ? haddr1 : '**** **** ****';
+      return street + ', ' + rawData.hcity + ', ' + rawData.hstate + ' ' + rawData.hpostal;
+    }
+
+    // ── Build editable fields from non-PII data ──
+    var fields = {
+      baba:          { label: 'Bank information',     rawKey: 'baba',
+                       value: bankDisplayValue(rawData.baba), type: 'text' },
+      netim:         { label: 'Net monthly income', rawKey: 'netim',
+                       value: formatCurrency(rawData.netim), type: 'text' },
+      bacctype:      { label: 'Bank account type',   rawKey: 'bacctype',
+                       value: bacctypeMap[rawData.bacctype] || 'Checking', type: 'select',
+                       options: Object.values(bacctypeMap), codeMap: bacctypeMap },
+      isdd:          { label: 'Direct deposit',       rawKey: 'isdd',
+                       value: rawData.isdd === 1 ? 'Yes' : 'No', type: 'select',
+                       options: ['Yes','No'] },
+      i_ad_ccDebtAmt:{ label: 'Credit card debt',   rawKey: 'i_ad_ccDebtAmt',
+                       value: formatCurrency(rawData.i_ad_ccDebtAmt), type: 'text' },
+      priincsrc:     { label: 'Income source',       rawKey: 'priincsrc',
+                       value: priincsrcMap[rawData.priincsrc] || 'Other', type: 'select',
+                       options: Object.values(priincsrcMap), codeMap: priincsrcMap },
+      payfreq:       { label: 'Pay frequency',       rawKey: 'payfreq',
+                       value: payfreqMap[rawData.payfreq] || 'Monthly', type: 'select',
+                       options: Object.values(payfreqMap), codeMap: payfreqMap },
+      ishowner:      { label: 'Homeowner',            rawKey: 'ishowner',
+                       value: rawData.ishowner === '1' ? 'Yes' : 'No', type: 'select',
+                       options: ['Yes','No'] },
+      haddress:      { label: 'Home address',         rawKey: 'haddress',
+                       value: addressDisplayValue(), type: 'custom' },
+      isactmil:      { label: 'Active military',      rawKey: 'isactmil',
+                       value: rawData.isactmil === '1' ? 'Yes' : 'No', type: 'select',
+                       options: ['Yes','No'] }
+    };
+
+    var pencilSvg = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M11.5 1.5l3 3L5 14H2v-3L11.5 1.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    var checkSvg  = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+    var VISIBLE_COUNT = 4;
+
+    var hintSvg = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1a7 7 0 100 14A7 7 0 008 1z" stroke="currentColor" stroke-width="1.3"/><path d="M8 4.5v3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="10.5" r="0.6" fill="currentColor"/></svg>';
+    var greenCheckSvg = '<span class="review-row-check" aria-label="Verified"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="currentColor" opacity="0.12"/><path d="M5 8.2l2 2 4-4.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
+
+    function renderRows() {
+      var container = document.getElementById('reviewRows');
+      container.innerHTML = '';
+      var keys = Object.keys(fields);
+      var showBankHint = isFintech(rawData.baba);
+      var showIncomeHint = rawData.netim <= 3000;
+      for (var i = 0; i < keys.length; i++) {
+        var key = keys[i];
+        var d = fields[key];
+        var row = document.createElement('div');
+        var flagBank   = key === 'baba' && showBankHint;
+        var flagIncome = key === 'netim' && showIncomeHint;
+        row.className = 'review-row' + (i >= VISIBLE_COUNT ? ' hidden-row' : '') + ((flagBank || flagIncome) ? ' has-hint' : '');
+        row.setAttribute('data-key', key);
+        var valClass = 'review-row-value' + (key === 'haddress' ? ' address-val' : '');
+        var hasWarning = flagBank || flagIncome;
+        row.innerHTML =
+          '<span class="review-row-label">' + d.label + '</span>' +
+          '<div class="review-row-right">' +
+            (!hasWarning ? greenCheckSvg : '') +
+            '<span class="' + valClass + '">' + d.value + '</span>' +
+            '<button type="button" class="review-row-edit" onclick="editRow(\'' + key + '\')" aria-label="Edit ' + d.label + '">' + pencilSvg + '</button>' +
+          '</div>';
+        container.appendChild(row);
+
+        // Bank hint
+        if (flagBank) {
+          var bankHint = document.createElement('div');
+          bankHint.className = 'review-row-hint';
+          bankHint.innerHTML = hintSvg + '<span>Traditional banks have higher approval rates than ' + getBankName(rawData.baba) + '. <a onclick="editRow(\'baba\')">Update</a></span>';
+          container.appendChild(bankHint);
+        }
+
+        // Income hint
+        if (flagIncome) {
+          var incomeHint = document.createElement('div');
+          incomeHint.className = 'review-row-hint';
+          incomeHint.innerHTML = hintSvg + '<span>Income above $4,000/mo improves lender options. <a onclick="editRow(\'netim\')">Update</a></span>';
+          container.appendChild(incomeHint);
+        }
+      }
+      // Update show-more button visibility
+      var btn = document.getElementById('showMoreBtn');
+      btn.style.display = keys.length > VISIBLE_COUNT ? '' : 'none';
+    }
+
+    function toggleShowMore() {
+      var card = document.getElementById('reviewCard');
+      var expanded = card.classList.toggle('expanded');
+      document.getElementById('showMoreText').textContent = expanded ? 'Show less' : 'Show more';
+    }
+
+    function buildEditor(key, showSave) {
+      var d = fields[key];
+      if (d.type === 'select') {
+        var opts = '';
+        for (var i = 0; i < d.options.length; i++) {
+          var sel = d.options[i] === d.value ? ' selected' : '';
+          opts += '<option' + sel + '>' + d.options[i] + '</option>';
+        }
+        var html = '<select class="review-row-select" data-key="' + key + '">' + opts + '</select>';
+        if (showSave) html += '<button type="button" class="review-row-save" onclick="saveRow(\'' + key + '\')">' + checkSvg + '</button>';
+        return html;
+      } else {
+        // For bank, edit the raw ABA, not the display name
+        var editVal = key === 'baba' ? rawData.baba : d.value;
+        var extra = key === 'baba' ? ' maxlength="9" inputmode="numeric" placeholder="9-digit routing #"' : '';
+        var html = '<input class="review-row-input" data-key="' + key + '" value="' + editVal + '"' + extra + '>';
+        if (showSave) html += '<button type="button" class="review-row-save" onclick="saveRow(\'' + key + '\')">' + checkSvg + '</button>';
+        return html;
+      }
+    }
+
+    function editRow(key) {
+      // Special multi-field panels
+      if (key === 'baba') { editBank(); return; }
+      if (key === 'haddress') { editAddress(); return; }
+      var row = document.querySelector('.review-row[data-key="' + key + '"]');
+      row.classList.add('editing');
+      var rightEl = row.querySelector('.review-row-right');
+      rightEl.innerHTML = buildEditor(key, true);
+      var input = rightEl.querySelector('input');
+      if (input) {
+        input.focus();
+        input.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') saveRow(key);
+        });
+      }
+    }
+
+    function editBank() {
+      // Remove any existing bank edit panel
+      var existing = document.getElementById('bankEditPanel');
+      if (existing) return existing.querySelector('input').focus();
+
+      var row = document.querySelector('.review-row[data-key="baba"]');
+      row.classList.add('editing');
+
+      // Hide the hint if visible
+      var hint = row.nextElementSibling;
+      if (hint && hint.classList.contains('review-row-hint')) {
+        hint.style.display = 'none';
+      }
+
+      var panel = document.createElement('div');
+      panel.className = 'bank-edit-panel';
+      panel.id = 'bankEditPanel';
+      panel.innerHTML =
+        '<div class="bank-edit-field">' +
+          '<label for="editAba">Routing number (ABA)</label>' +
+          '<input type="text" id="editAba" value="' + rawData.baba + '" maxlength="9" inputmode="numeric" placeholder="9-digit routing number">' +
+        '</div>' +
+        '<div class="bank-edit-field">' +
+          '<label for="editAcct">Account number</label>' +
+          '<input type="text" id="editAcct" value="" maxlength="17" inputmode="numeric" placeholder="Enter account number">' +
+        '</div>' +
+        '<div class="bank-edit-actions">' +
+          '<button type="button" class="bank-cancel" onclick="cancelBankEdit()">Cancel</button>' +
+          '<button type="button" class="bank-save" id="bankSaveBtn" disabled onclick="saveBankEdit()">Save</button>' +
+        '</div>';
+
+      row.parentNode.insertBefore(panel, row.nextElementSibling && row.nextElementSibling.classList.contains('review-row-hint') ? row.nextElementSibling.nextSibling : row.nextSibling);
+
+      // Validation
+      var abaInput = document.getElementById('editAba');
+      var acctInput = document.getElementById('editAcct');
+      var saveBtn = document.getElementById('bankSaveBtn');
+
+      function validateBank() {
+        var abaOk = abaInput.value.replace(/\D/g, '').length === 9;
+        var acctOk = acctInput.value.replace(/\D/g, '').length >= 4;
+        saveBtn.disabled = !(abaOk && acctOk);
+      }
+
+      abaInput.addEventListener('input', function() { this.value = this.value.replace(/\D/g, ''); validateBank(); });
+      acctInput.addEventListener('input', function() { this.value = this.value.replace(/\D/g, ''); validateBank(); });
+      acctInput.addEventListener('keydown', function(e) { if (e.key === 'Enter' && !saveBtn.disabled) saveBankEdit(); });
+
+      abaInput.focus();
+    }
+
+    function saveBankEdit() {
+      var aba = document.getElementById('editAba').value.trim();
+      var acct = document.getElementById('editAcct').value.trim();
+      rawData.baba = aba;
+      rawData.last4bacc = acct.slice(-4);
+      fields.baba.value = bankDisplayValue(aba);
+      cancelBankEdit();
+    }
+
+    function cancelBankEdit() {
+      var panel = document.getElementById('bankEditPanel');
+      if (panel) panel.remove();
+      renderRows();
+    }
+
+    // ── Address editor ──
+    function editAddress() {
+      var existing = document.getElementById('addrEditPanel');
+      if (existing) return existing.querySelector('input').focus();
+
+      var row = document.querySelector('.review-row[data-key="haddress"]');
+      row.classList.add('editing');
+
+      var panel = document.createElement('div');
+      panel.className = 'addr-edit-panel';
+      panel.id = 'addrEditPanel';
+      panel.innerHTML =
+        '<div class="bank-edit-field">' +
+          '<label for="editAddr1">Street address</label>' +
+          '<input type="text" id="editAddr1" value="' + haddr1 + '" placeholder="123 Main St" autocomplete="street-address">' +
+        '</div>' +
+        '<div class="addr-edit-row">' +
+          '<div class="bank-edit-field">' +
+            '<label for="editCity">City</label>' +
+            '<input type="text" id="editCity" value="' + rawData.hcity + '" autocomplete="address-level2">' +
+          '</div>' +
+          '<div class="bank-edit-field small">' +
+            '<label for="editState">State</label>' +
+            '<input type="text" id="editState" value="' + rawData.hstate + '" maxlength="2" autocomplete="address-level1" style="text-transform:uppercase">' +
+          '</div>' +
+          '<div class="bank-edit-field small">' +
+            '<label for="editZip">Zip</label>' +
+            '<input type="text" id="editZip" value="' + rawData.hpostal + '" maxlength="5" inputmode="numeric" autocomplete="postal-code">' +
+          '</div>' +
+        '</div>' +
+        '<div class="bank-edit-actions">' +
+          '<button type="button" class="bank-cancel" onclick="cancelAddressEdit()">Cancel</button>' +
+          '<button type="button" class="bank-save" onclick="saveAddressEdit()">Save</button>' +
+        '</div>';
+
+      row.parentNode.insertBefore(panel, row.nextSibling);
+
+      var zipInput = document.getElementById('editZip');
+      zipInput.addEventListener('input', function() { this.value = this.value.replace(/\D/g, ''); });
+
+      document.getElementById('editAddr1').focus();
+    }
+
+    function saveAddressEdit() {
+      var addr1 = document.getElementById('editAddr1').value.trim();
+      var city  = document.getElementById('editCity').value.trim();
+      var state = document.getElementById('editState').value.trim().toUpperCase();
+      var zip   = document.getElementById('editZip').value.trim();
+
+      if (city) rawData.hcity = city;
+      if (state) rawData.hstate = state;
+      if (zip) rawData.hpostal = zip;
+      haddr1 = addr1;
+
+      fields.haddress.value = addressDisplayValue();
+      cancelAddressEdit();
+    }
+
+    function cancelAddressEdit() {
+      var panel = document.getElementById('addrEditPanel');
+      if (panel) panel.remove();
+      renderRows();
+    }
+
+    function saveRow(key) {
+      var el = document.querySelector('[data-key="' + key + '"].review-row-input, [data-key="' + key + '"].review-row-select');
+      if (el && el.value.trim()) {
+        var val = el.value.trim();
+        syncToRaw(key, val);
+        // For bank, re-derive the display value from the new ABA
+        if (key === 'baba') {
+          fields[key].value = bankDisplayValue(rawData.baba);
+        } else {
+          fields[key].value = val;
+        }
+      }
+      renderRows();
+    }
+
+    // ── Write display value back to rawData in original format ──
+    function syncToRaw(key, displayVal) {
+      var d = fields[key];
+      var rk = d.rawKey;
+      if (d.codeMap) {
+        // reverse-lookup: display string → code number
+        var entries = Object.entries(d.codeMap);
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i][1] === displayVal) { rawData[rk] = Number(entries[i][0]); return; }
+        }
+      }
+      if (rk === 'ishowner' || rk === 'isactmil') { rawData[rk] = displayVal === 'Yes' ? '1' : '0'; return; }
+      if (rk === 'isdd') { rawData[rk] = displayVal === 'Yes' ? 1 : 0; return; }
+      if (rk === 'netim' || rk === 'i_ad_ccDebtAmt') { rawData[rk] = Number(displayVal.replace(/[^0-9]/g, '')); return; }
+      if (rk === 'baba') { rawData[rk] = displayVal.replace(/[^0-9]/g, ''); return; }
+      rawData[rk] = displayVal;
+    }
+
+    function toggleEditAll() {
+      var card = document.getElementById('reviewCard');
+      card.classList.add('edit-all');
+      card.classList.add('expanded');
+      document.getElementById('showMoreText').textContent = 'Show less';
+      document.getElementById('showMoreBtn').style.display = 'none';
+      var keys = Object.keys(fields);
+      for (var i = 0; i < keys.length; i++) {
+        var k = keys[i];
+        // Custom panels handle their own editing
+        if (fields[k].type === 'custom' || k === 'baba') {
+          editRow(k);
+          continue;
+        }
+        var row = document.querySelector('.review-row[data-key="' + k + '"]');
+        row.classList.add('editing');
+        row.querySelector('.review-row-right').innerHTML = buildEditor(k, false);
+      }
+      card.querySelector('.edit-all-btn').style.display = 'none';
+    }
+
+    function saveAll() {
+      // Save inline fields
+      var keys = Object.keys(fields);
+      for (var i = 0; i < keys.length; i++) {
+        var k = keys[i];
+        if (fields[k].type === 'custom' || k === 'baba') continue;
+        var el = document.querySelector('[data-key="' + k + '"].review-row-input, [data-key="' + k + '"].review-row-select');
+        if (el && el.value.trim()) {
+          fields[k].value = el.value.trim();
+          syncToRaw(k, el.value.trim());
+        }
+      }
+      // Save bank panel if open
+      var bankPanel = document.getElementById('bankEditPanel');
+      if (bankPanel) saveBankEdit();
+      // Save address panel if open
+      var addrPanel = document.getElementById('addrEditPanel');
+      if (addrPanel) saveAddressEdit();
+      cancelEditAll();
+    }
+
+    function cancelEditAll() {
+      var card = document.getElementById('reviewCard');
+      card.classList.remove('edit-all');
+      card.classList.remove('expanded');
+      card.querySelector('.edit-all-btn').style.display = '';
+      document.getElementById('showMoreText').textContent = 'Show more';
+      renderRows();
+    }
+
+    renderRows();
+  </script>
+</body>
+</html>
