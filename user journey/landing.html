@@ -3,205 +3,454 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fast Loan Advance — Personal Loans Up To $5,000</title>
+  <title>Grace Loan Advance — Personal Loans Up To $5,000</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --green-600: #2e7d32;
-      --green-500: #3a9e3f;
-      --green-50: #f0faf0;
-      --gray-900: #111;
-      --gray-700: #333;
-      --gray-600: #555;
-      --gray-400: #999;
-      --gray-300: #ccc;
-      --gray-200: #e5e5e5;
-      --gray-100: #f5f5f5;
-      --gray-50: #fafafa;
-      --white: #fff;
-      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-display: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+      --green-800: #b5650a;
+      --green-700: #c6710b;
+      --green-600: #d88a1a;
+      --green-500: #f5a623;
+      --green-400: #f7b84d;
+      --green-100: #fde8c4;
+      --green-50: #fef7ec;
+      --dark: #101720;
+      --text: #101720;
+      --text-2: #3d4a5c;
+      --text-3: #6b7a90;
+      --text-4: #95a1b3;
+      --border: #dfe3ea;
+      --surface: #f5f6f8;
+      --card: #ffffff;
+      --white: #ffffff;
+      --shadow-sm: 0 1px 3px rgba(16,23,32,0.04), 0 1px 2px rgba(16,23,32,0.02);
+      --shadow-md: 0 4px 16px rgba(16,23,32,0.06), 0 1px 4px rgba(16,23,32,0.04);
+      --shadow-lg: 0 12px 40px rgba(16,23,32,0.08), 0 4px 12px rgba(16,23,32,0.04);
+      --shadow-cta: 0 4px 14px rgba(245,166,35,0.35), 0 1px 3px rgba(245,166,35,0.15);
+      --shadow-cta-hover: 0 8px 24px rgba(245,166,35,0.4), 0 2px 6px rgba(245,166,35,0.2);
+      --radius-xl: 24px;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-full: 999px;
+      --font: 'Red Hat Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { height: 100%; }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { height: 100%; }
     body {
-      font-family: var(--font-body);
-      background: var(--gray-50);
-      color: var(--gray-900);
+      font-family: var(--font);
+      background: var(--surface);
+      color: var(--text);
+      min-height: 100%;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
     }
 
-    /* ── Nav ── */
+    /* ─────────────────────────────
+       NAV
+    ───────────────────────────── */
     .nav {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 20px;
-      background: var(--white);
-      border-bottom: 1px solid var(--gray-100);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: saturate(180%) blur(16px);
+      -webkit-backdrop-filter: saturate(180%) blur(16px);
+      border-bottom: 1px solid rgba(223,227,234,0.6);
     }
-    .logo-mark { display: inline-flex; align-items: center; gap: 1px; }
-    .logo-word { font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--gray-900); letter-spacing: 0.5px; }
-    .logo-sub { font-size: 7px; font-weight: 500; color: var(--gray-400); letter-spacing: 3.5px; text-transform: uppercase; display: block; text-align: center; margin-top: -1px; }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+    }
+    .logo-mark { display: inline-flex; align-items: center; gap: 2px; }
+    .logo-word {
+      font-weight: 800;
+      font-size: 17px;
+      color: var(--text);
+      letter-spacing: 0.3px;
+    }
+    .logo-leaf { margin: 0 -1px; }
+    .logo-sub {
+      font-size: 7px;
+      font-weight: 700;
+      color: var(--text-4);
+      letter-spacing: 3.8px;
+      text-transform: uppercase;
+      display: block;
+      text-align: center;
+      margin-top: -2px;
+    }
     .nav-cta {
-      height: 34px; padding: 0 16px;
-      background: var(--green-500); color: var(--white);
-      font-family: var(--font-body); font-size: 13px; font-weight: 700;
-      border: none; border-radius: 8px; cursor: pointer;
-      text-decoration: none; display: inline-flex; align-items: center;
-      transition: background 0.15s;
+      display: none;
+      height: 38px;
+      padding: 0 22px;
+      background: var(--green-600);
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 13.5px;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      text-decoration: none;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: -0.1px;
+      transition: all 0.25s var(--ease-out);
+      box-shadow: var(--shadow-sm);
     }
-    .nav-cta:hover { background: var(--green-600); }
+    .nav-cta:hover {
+      background: var(--green-800);
+      box-shadow: 0 4px 16px rgba(245,166,35,0.25);
+      transform: translateY(-1px);
+    }
 
-    /* ── Hero wrapper ── */
+    /* ─────────────────────────────
+       HERO
+    ───────────────────────────── */
     .hero {
-      background: var(--white);
+      padding: 20px 16px 0;
       overflow: hidden;
     }
-    .hero-inner {
-      max-width: 480px;
+    .hero-wrap {
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 32px 24px 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
+      gap: 20px;
     }
 
-    /* ── Headline ── */
-    .hero h1 {
-      font-family: var(--font-display);
-      font-size: 32px;
-      font-weight: 700;
-      line-height: 1.1;
-      color: var(--gray-900);
-      margin-bottom: 24px;
-      letter-spacing: -0.5px;
-    }
-    .hero h1 .green { color: var(--green-500); }
-
-    /* ── Bullets ── */
-    .bullets {
-      list-style: none;
+    /* ── Card ── */
+    .hero-card {
+      background: var(--card);
+      border-radius: var(--radius-xl);
+      padding: 36px 24px 32px;
+      box-shadow: var(--shadow-md);
       width: 100%;
-      margin-bottom: 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    .bullets li {
+    /* subtle top accent line */
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green-400), var(--green-600), var(--green-400));
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    }
+
+    .hero-card h1 {
+      font-size: 1.85rem;
+      font-weight: 900;
+      line-height: 1.12;
+      color: var(--text);
+      letter-spacing: -0.6px;
+      margin-bottom: 12px;
+    }
+    .hero-card h1 em {
+      font-style: normal;
+      color: var(--green-700);
+    }
+
+    .hero-card .subtitle {
+      font-size: 14.5px;
+      font-weight: 400;
+      color: var(--text-3);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── Features ── */
+    .features {
+      list-style: none;
+      margin-bottom: 28px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .features li {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 8px 0;
-      font-size: 14px;
-      color: var(--gray-700);
-      line-height: 1.35;
-      text-align: left;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-2);
+      line-height: 1.45;
+      background: var(--surface);
+      border: 1px solid transparent;
+      transition: border-color 0.2s, background 0.2s;
     }
-    .bullets li .icon {
+    .features li:hover {
+      border-color: var(--green-100);
+      background: var(--green-50);
+    }
+    .features li strong {
+      font-weight: 700;
+      color: var(--text);
+    }
+    .feat-check {
       flex-shrink: 0;
       width: 22px; height: 22px;
       border-radius: 50%;
       background: var(--green-50);
-      color: var(--green-500);
+      border: 1.5px solid var(--green-100);
       display: flex; align-items: center; justify-content: center;
+      color: var(--green-500);
     }
 
     /* ── CTA ── */
-    .hero-cta {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      width: 100%; max-width: 340px; height: 56px;
-      background: var(--green-500); color: var(--white);
-      font-family: var(--font-body); font-size: 18px; font-weight: 700;
-      border: none; border-radius: 14px; cursor: pointer; text-decoration: none;
-      box-shadow: 0 6px 24px rgba(58,158,63,0.3);
-      transition: background 0.15s, transform 0.1s;
-      margin-bottom: 10px;
+    .cta-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
     }
-    .hero-cta:hover { background: var(--green-600); }
-    .hero-cta:active { transform: scale(0.98); }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 360px;
+      height: 54px;
+      background: linear-gradient(160deg, var(--green-400) 0%, var(--green-600) 100%);
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.15px;
+      border: none;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: var(--shadow-cta);
+      transition: all 0.3s var(--ease-out);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-cta::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(255,255,255,0.18) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-cta-hover);
+    }
+    .hero-cta:active {
+      transform: translateY(0);
+      box-shadow: var(--shadow-cta);
+    }
+    .hero-cta svg { transition: transform 0.25s var(--ease-spring); }
+    .hero-cta:hover svg { transform: translateX(3px); }
+
+    .cta-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-4);
+    }
+    .cta-meta span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .cta-meta svg { opacity: 0.5; }
 
     .disclosure {
-      font-size: 12px; color: var(--gray-400); margin-bottom: 28px;
+      font-size: 11.5px;
+      color: var(--text-4);
     }
-    .disclosure a { color: var(--gray-600); text-decoration: underline; text-underline-offset: 2px; }
+    .disclosure a {
+      color: var(--text-3);
+      text-decoration: underline;
+      text-decoration-color: var(--border);
+      text-underline-offset: 2px;
+      transition: color 0.15s;
+    }
+    .disclosure a:hover { color: var(--text); }
 
     /* ── Image ── */
     .hero-image {
       width: 100%;
-      max-width: 300px;
-      margin: 0 auto;
+      max-width: 260px;
+      align-self: flex-end;
     }
     .hero-image img {
-      width: 100%; height: auto; display: block;
-      border-radius: 20px 20px 0 0;
+      width: 100%;
+      height: auto;
+      display: block;
+      mix-blend-mode: multiply;
     }
 
-    /* ── Footer legal ── */
+    /* ─────────────────────────────
+       FLOATING CTA
+    ───────────────────────────── */
+    .float-cta {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 40;
+      padding: 12px 16px;
+      padding-bottom: max(12px, env(safe-area-inset-bottom));
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 -4px 20px rgba(16,23,32,0.08);
+      transform: translateY(100%);
+      transition: transform 0.35s var(--ease-out);
+    }
+    .float-cta.visible { transform: translateY(0); }
+    .float-cta a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      height: 50px;
+      background: linear-gradient(160deg, var(--green-400) 0%, var(--green-600) 100%);
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      box-shadow: var(--shadow-cta);
+    }
+
+    /* ─────────────────────────────
+       FOOTER
+    ───────────────────────────── */
     .footer {
-      padding: 16px 24px 24px;
+      padding: 20px 20px 32px;
       text-align: center;
     }
     .footer p {
-      font-size: 10px; color: var(--gray-400); line-height: 1.6;
-      max-width: 600px; margin: 0 auto;
+      font-size: 10px;
+      font-weight: 400;
+      color: var(--text-4);
+      line-height: 1.75;
+      max-width: 600px;
+      margin: 0 auto;
     }
-    .footer a { color: var(--gray-600); text-decoration: underline; text-underline-offset: 2px; }
+    .footer a {
+      color: var(--text-3);
+      text-decoration: underline;
+      text-decoration-color: var(--border);
+      text-underline-offset: 2px;
+    }
+    .footer a:hover { color: var(--text); }
 
-    /* ═══════════════════════════
-       DESKTOP 768px+
-    ═══════════════════════════ */
+    /* ═════════════════════════════
+       768px+
+    ═════════════════════════════ */
     @media (min-width: 768px) {
-      .nav {
-        padding: 16px 48px;
-        max-width: 1200px; margin: 0 auto;
-      }
-      .logo-word { font-size: 20px; }
+      .nav-inner { padding: 14px 40px; }
+      .logo-word { font-size: 21px; }
       .logo-sub { font-size: 8px; letter-spacing: 4.5px; }
+      .nav-cta { display: inline-flex; }
 
-      .hero-inner {
-        max-width: 1100px;
+      .hero {
+        padding: 36px 28px 36px;
+        min-height: min(calc(100vh - 68px), 580px);
+        display: flex;
+        align-items: center;
+      }
+      .hero-wrap {
         flex-direction: row;
         align-items: center;
+        gap: 36px;
+      }
+
+      .hero-card {
+        flex: 1;
         text-align: left;
-        padding: 48px 48px 0;
-        gap: 40px;
+        padding: 44px 40px 40px;
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-lg);
       }
-
-      .hero-content {
-        flex: 1; min-width: 0;
-      }
-
-      .hero h1 {
-        font-size: 44px;
+      .hero-card h1 {
+        font-size: 2.6rem;
         letter-spacing: -1px;
+        margin-bottom: 14px;
       }
-
-      .bullets li { font-size: 15px; padding: 9px 0; }
-
-      .hero-cta {
-        margin: 0 0 12px;
-        width: 320px;
+      .hero-card .subtitle {
+        margin-left: 0; margin-right: 0;
+        font-size: 15.5px;
+        max-width: 460px;
       }
+      .features li { font-size: 14.5px; padding: 11px 16px; }
+      .feat-check { width: 24px; height: 24px; }
 
+      .cta-wrap { align-items: flex-start; }
+      .hero-cta { width: 300px; height: 54px; font-size: 16px; }
       .disclosure { text-align: left; }
 
       .hero-image {
         flex: 0 0 380px;
         max-width: 380px;
         align-self: flex-end;
+        margin-bottom: -36px;
       }
-      .hero-image img {
-        border-radius: 24px 24px 0 0;
-      }
+
+      .float-cta { display: none; }
+      .footer { padding: 28px 40px 36px; }
     }
 
+    /* ═════════════════════════════
+       1024px+
+    ═════════════════════════════ */
     @media (min-width: 1024px) {
-      .hero-inner { padding: 56px 64px 0; gap: 56px; }
-      .hero h1 { font-size: 50px; }
-      .hero-image { flex: 0 0 420px; max-width: 420px; }
+      .nav-inner { padding: 16px 56px; }
+
+      .hero { padding: 44px 44px 44px; }
+      .hero-wrap { gap: 44px; }
+
+      .hero-card { padding: 52px 48px 48px; }
+      .hero-card h1 { font-size: 2.9rem; letter-spacing: -1.2px; }
+      .hero-card .subtitle { font-size: 16px; }
+      .features li { font-size: 15px; }
+
+      .hero-cta { width: 320px; height: 56px; font-size: 17px; }
+
+      .hero-image { flex: 0 0 440px; max-width: 440px; margin-bottom: -44px; }
+    }
+
+    /* ═════════════════════════════
+       1280px+
+    ═════════════════════════════ */
+    @media (min-width: 1280px) {
+      .hero-wrap { gap: 56px; }
+      .hero-card h1 { font-size: 3.15rem; }
+      .hero-image { flex: 0 0 500px; max-width: 500px; margin-bottom: -52px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
+      .hero-cta:hover, .nav-cta:hover { transform: none; }
       .hero-cta:active { transform: none; }
+      .float-cta { transition: none; }
     }
   </style>
 </head>
@@ -209,59 +458,94 @@
 
   <!-- Nav -->
   <nav class="nav">
-    <div>
-      <div class="logo-mark">
-        <span class="logo-word">FAST</span>
-        <svg width="18" height="22" viewBox="0 0 30 36" fill="none" aria-hidden="true">
-          <path d="M15 2C8 8 4 16 6 26C8 22 11 18 15 16C19 18 22 22 24 26C26 16 22 8 15 2Z" fill="#3a9e3f" stroke="#2e7d32" stroke-width="1"/>
-          <line x1="15" y1="16" x2="15" y2="34" stroke="#2e7d32" stroke-width="2"/>
-        </svg>
-        <span class="logo-word">LOAN</span>
+    <div class="nav-inner">
+      <div>
+        <div class="logo-mark">
+          <span class="logo-word">GRACE</span>
+          <svg class="logo-leaf" width="20" height="24" viewBox="0 0 30 36" fill="none" aria-hidden="true">
+            <path d="M15 2C8 8 4 16 6 26C8 22 11 18 15 16C19 18 22 22 24 26C26 16 22 8 15 2Z" fill="#f5a623" stroke="#d88a1a" stroke-width="1"/>
+            <line x1="15" y1="16" x2="15" y2="34" stroke="#d88a1a" stroke-width="2"/>
+          </svg>
+          <span class="logo-word">LOAN</span>
+        </div>
+        <span class="logo-sub">ADVANCE</span>
       </div>
-      <span class="logo-sub">ADVANCE</span>
+      <a href="index.html" class="nav-cta">
+        Start My Request
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8m-3-3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </div>
-    <a href="index.html" class="nav-cta">Start My Request</a>
   </nav>
 
   <!-- Hero -->
-  <div class="hero">
-    <div class="hero-inner">
-      <div class="hero-content">
-        <h1>You're <span class="green">one step</span> away from your loan</h1>
-        <p style="font-size:15px;color:var(--gray-600);line-height:1.55;margin-bottom:24px;max-width:420px">Every day, thousands of people just like you get connected with lenders through our network. It takes about 2 minutes.</p>
+  <section class="hero">
+    <div class="hero-wrap">
+      <div class="hero-card">
+        <h1>You're <em>one step</em> away from your&nbsp;loan</h1>
+        <p class="subtitle">Every day, thousands of people just like you get connected with lenders through our network. It takes about 2&nbsp;minutes.</p>
 
-        <ul class="bullets">
+        <ul class="features">
           <li>
-            <span class="icon"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 8.2l3 3 5-5.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="feat-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 8.5l3 3 5-5.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             APR from <strong>5.99%</strong> up to <strong>35.99%</strong> for qualified borrowers
           </li>
           <li>
-            <span class="icon"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 8.2l3 3 5-5.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="feat-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 8.5l3 3 5-5.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             91-day minimum up to a <strong>72-month</strong> repayment period
           </li>
           <li>
-            <span class="icon"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 8.2l3 3 5-5.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="feat-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 8.5l3 3 5-5.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             Funds as soon as the <strong>next business day</strong>
           </li>
         </ul>
 
-        <a href="index.html" class="hero-cta">
-          Get Started — It's Free
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5m-4.5-4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <p class="disclosure"><a href="#">Disclosures</a></p>
+        <div class="cta-wrap">
+          <a href="index.html" class="hero-cta" id="mainCta">
+            Get Started — It's Free
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9h10m-4-4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <div class="cta-meta">
+            <span>
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2" stroke="currentColor" stroke-width="1.2"/></svg>
+              256-bit encrypted
+            </span>
+            <span>
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 8.2l1.8 1.8 3.2-3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+              No credit impact
+            </span>
+          </div>
+          <p class="disclosure"><a href="#">Disclosures</a></p>
+        </div>
       </div>
 
       <div class="hero-image">
-        <img src="hero-image.png" alt="Happy customer applying for a loan on their laptop" width="420" height="560">
+        <img src="hero-image.png" alt="Happy customer applying for a loan" width="440" height="587" loading="eager">
       </div>
     </div>
+  </section>
+
+  <!-- Floating CTA (mobile) -->
+  <div class="float-cta" id="floatCta">
+    <a href="index.html">
+      Get Started — It's Free
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m-4-4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
   </div>
 
   <!-- Footer -->
-  <div class="footer">
-    <p>APR ranges from 5.99% to 35.99% for qualified borrowers. Repayment terms from 91 days to 72 months. Fast Loan Advance is not a lender. By submitting, you agree to our <a href="#">Terms</a>, <a href="#">Privacy Policy</a>, and <a href="#">Credit Authorization</a>. <a href="#">Disclosures</a></p>
-  </div>
+  <footer class="footer">
+    <p>APR ranges from 5.99% to 35.99% for qualified borrowers. Repayment terms from 91 days to 72 months. Grace Loan Advance is not a lender and does not make credit decisions. By submitting your request, you agree to our <a href="#">Terms & Conditions</a>, <a href="#">Privacy Policy</a>, and <a href="#">Credit Authorization</a>. Checking your rate does not affect your credit score. <a href="#">Disclosures</a></p>
+  </footer>
 
+  <script>
+    // Floating CTA — slides in when main CTA leaves viewport
+    var mainCta = document.getElementById('mainCta');
+    var floatCta = document.getElementById('floatCta');
+    if (mainCta && floatCta && window.innerWidth < 768) {
+      new IntersectionObserver(function(e) {
+        floatCta.classList.toggle('visible', !e[0].isIntersecting);
+      }, { threshold: 0 }).observe(mainCta);
+    }
+  </script>
 </body>
 </html>
