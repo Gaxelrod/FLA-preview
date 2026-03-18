@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Fast Loan Advance — Find Your Options</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-600: #2e7d32;
+      --green-500: #3a9e3f;
+      --green-50: #f0faf0;
+      --gray-900: #111;
+      --gray-700: #333;
+      --gray-600: #555;
+      --gray-400: #999;
+      --gray-300: #ccc;
+      --gray-200: #e5e5e5;
+      --gray-100: #f5f5f5;
+      --gray-50: #fafafa;
+      --white: #fff;
+      --radius: 12px;
+      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { height: 100%; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--gray-100);
+      color: var(--gray-900);
+      min-height: 100%;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ── Shell ── */
+    .page {
+      max-width: 480px;
+      margin: 0 auto;
+      background: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Progress ── */
+    .progress { height: 3px; background: var(--gray-200); }
+    .progress-fill {
+      height: 100%;
+      width: 15%;
+      background: var(--green-500);
+      border-radius: 0 2px 2px 0;
+      transition: width 0.4s ease;
+    }
+
+    /* ── Logo ── */
+    .logo {
+      text-align: center;
+      padding: 16px 0 12px;
+    }
+    .logo-mark { display: inline-flex; align-items: center; gap: 1px; }
+    .logo-word {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--gray-900);
+      letter-spacing: 0.5px;
+    }
+    .logo-sub {
+      display: block;
+      font-size: 8px;
+      font-weight: 500;
+      color: var(--gray-400);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: -1px;
+    }
+
+    /* ── Content ── */
+    .content {
+      flex: 1;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+    }
+    .hero p {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+
+    /* ── Method toggle ── */
+    .method-toggle {
+      display: flex;
+      background: var(--gray-100);
+      border-radius: 10px;
+      padding: 3px;
+      margin-bottom: 20px;
+    }
+    .method-btn {
+      flex: 1;
+      height: 40px;
+      background: none;
+      border: none;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-400);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .method-btn.active {
+      background: var(--white);
+      color: var(--gray-900);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .method-btn svg { flex-shrink: 0; }
+
+    /* ── Form sections ── */
+    .form-section { display: none; }
+    .form-section.active { display: block; }
+
+    /* ── Fields ── */
+    .field-group { margin-bottom: 14px; }
+    .field-row { display: flex; gap: 10px; }
+    .field-row .field-group { flex: 1; min-width: 0; }
+
+    .field-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-600);
+      margin-bottom: 5px;
+    }
+
+    .field-input {
+      width: 100%;
+      height: 52px;
+      padding: 0 14px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 10px;
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--gray-900);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      -webkit-appearance: none;
+      appearance: none;
+      background: var(--white);
+    }
+    .field-input:focus {
+      border-color: var(--green-500);
+      box-shadow: 0 0 0 3px rgba(58,158,63,0.1);
+    }
+    .field-input::placeholder {
+      color: var(--gray-300);
+      font-weight: 400;
+    }
+    .field-input.filled {
+      border-color: var(--green-500);
+      background: var(--green-50);
+    }
+
+    /* DOB fields */
+    .dob-row { display: flex; gap: 8px; }
+    .dob-row .field-group { flex: 1; }
+    .dob-row .field-group:last-child { flex: 1.3; }
+
+    /* SSN field */
+    .ssn-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .ssn-dots {
+      font-size: 24px;
+      letter-spacing: 3px;
+      color: var(--gray-300);
+      font-weight: 700;
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+    .ssn-input {
+      width: 100px;
+      text-align: center;
+      letter-spacing: 6px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    /* ── Reassurance ── */
+    .reassurance {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: var(--green-50);
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .reassurance svg { flex-shrink: 0; color: var(--green-500); }
+    .reassurance p {
+      font-size: 13px;
+      color: var(--green-600);
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
+    /* ── Spacer ── */
+    .spacer { flex: 1; min-height: 16px; }
+
+    /* ── Sticky CTA area ── */
+    .cta-area {
+      padding: 12px 20px;
+      padding-bottom: max(12px, env(safe-area-inset-bottom));
+      background: var(--white);
+      border-top: 1px solid var(--gray-100);
+      position: sticky;
+      bottom: 0;
+    }
+    .cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      height: 54px;
+      background: var(--green-500);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 17px;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background 0.15s, opacity 0.2s, transform 0.1s;
+    }
+    .cta-btn:hover { background: var(--green-600); }
+    .cta-btn:active { transform: scale(0.985); }
+    .cta-btn:disabled {
+      background: var(--gray-200);
+      color: var(--gray-400);
+      cursor: not-allowed;
+    }
+    .cta-btn:disabled:active { transform: none; }
+    .cta-btn svg { flex-shrink: 0; }
+
+    .cta-legal {
+      font-size: 10px;
+      color: var(--gray-400);
+      text-align: center;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+    .cta-legal a { color: var(--gray-600); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ── Trust bar ── */
+    .trust-row {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      padding: 10px 0 6px;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--gray-400);
+      letter-spacing: 0.2px;
+    }
+    .trust-item svg { color: var(--gray-300); }
+
+    /* ── Loading overlay ── */
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(255,255,255,0.95);
+      z-index: 100;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .loading-overlay.show { display: flex; }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--gray-200);
+      border-top-color: var(--green-500);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gray-700);
+      text-align: center;
+    }
+    .loading-sub {
+      font-size: 13px;
+      color: var(--gray-400);
+      margin-top: -8px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cta-btn:active { transform: none; }
+      .spinner { animation: none; }
+      .progress-fill { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+
+  <!-- Logo -->
+  <div class="logo">
+    <div class="logo-mark">
+      <span class="logo-word">FAST</span>
+      <svg width="20" height="24" viewBox="0 0 30 36" fill="none" aria-hidden="true">
+        <path d="M15 2C8 8 4 16 6 26C8 22 11 18 15 16C19 18 22 22 24 26C26 16 22 8 15 2Z" fill="#3a9e3f" stroke="#2e7d32" stroke-width="1"/>
+        <line x1="15" y1="16" x2="15" y2="34" stroke="#2e7d32" stroke-width="2"/>
+      </svg>
+      <span class="logo-word">LOAN</span>
+    </div>
+    <span class="logo-sub">ADVANCE</span>
+  </div>
+
+  <div class="content">
+
+    <!-- Hero -->
+    <div class="hero">
+      <h1>Let's find your loan options</h1>
+      <p>We just need a few details to look you up.</p>
+    </div>
+
+    <!-- Method toggle -->
+    <div class="method-toggle">
+      <button type="button" class="method-btn active" id="tabName" onclick="switchMethod('name')">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M2.5 14c0-3 2.5-5 5.5-5s5.5 2 5.5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        Name + Birthday
+      </button>
+      <button type="button" class="method-btn" id="tabEmail" onclick="switchMethod('email')">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="3.5" width="13" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 5l6.5 4 6.5-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        Email + SSN
+      </button>
+    </div>
+
+    <!-- Method A: Name + DOB (80% of users) -->
+    <div class="form-section active" id="formName">
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label" for="fname">First name</label>
+          <input class="field-input" type="text" id="fname" placeholder="John" autocomplete="given-name" autocapitalize="words" oninput="validate()">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="lname">Last name</label>
+          <input class="field-input" type="text" id="lname" placeholder="Smith" autocomplete="family-name" autocapitalize="words" oninput="validate()">
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Date of birth</label>
+        <div class="dob-row">
+          <div class="field-group">
+            <input class="field-input" type="text" id="dobMM" placeholder="MM" maxlength="2" inputmode="numeric" oninput="dobAdvance(this,'dobDD'); validate()" autocomplete="bday-month">
+          </div>
+          <div class="field-group">
+            <input class="field-input" type="text" id="dobDD" placeholder="DD" maxlength="2" inputmode="numeric" oninput="dobAdvance(this,'dobYYYY'); validate()" autocomplete="bday-day">
+          </div>
+          <div class="field-group">
+            <input class="field-input" type="text" id="dobYYYY" placeholder="YYYY" maxlength="4" inputmode="numeric" oninput="validate()" autocomplete="bday-year">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Method B: Email + Last 4 SSN -->
+    <div class="form-section" id="formEmail">
+      <div class="field-group">
+        <label class="field-label" for="email">Email address</label>
+        <input class="field-input" type="email" id="email" placeholder="you@email.com" autocomplete="email" inputmode="email" oninput="validate()">
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="ssn4">Last 4 of Social Security</label>
+        <div class="ssn-row">
+          <span class="ssn-dots">***-**-</span>
+          <input class="field-input ssn-input" type="text" id="ssn4" placeholder="0000" maxlength="4" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,''); validate()" autocomplete="off">
+        </div>
+      </div>
+    </div>
+
+    <!-- Reassurance -->
+    <div class="reassurance">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <rect x="3" y="7" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+        <path d="M6 7V5a3 3 0 016 0v2" stroke="currentColor" stroke-width="1.3"/>
+      </svg>
+      <p>Your info is encrypted and only used to find your file. It won't affect your credit.</p>
+    </div>
+
+    <div class="spacer"></div>
+  </div>
+
+  <!-- Sticky CTA -->
+  <div class="cta-area">
+    <button type="button" class="cta-btn" id="ctaBtn" disabled onclick="submitLookup()">
+      <span id="ctaText">Find My Options</span>
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5m-4.5-4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="trust-row">
+      <span class="trust-item">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="2" y="6" width="12" height="8" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 6V4.5a3 3 0 016 0V6" stroke="currentColor" stroke-width="1.2"/></svg>
+        256-bit SSL
+      </span>
+      <span class="trust-item">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M5 8.2l2 2 4-4.4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        No credit impact
+      </span>
+      <span class="trust-item">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 1.5l1.5 3h3.5l-2.75 2 1 3.5L8 8l-3.25 2 1-3.5L3 4.5h3.5z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        100+ lenders
+      </span>
+    </div>
+    <p class="cta-legal">By clicking continue, you agree to our <a href="#">Terms</a>, <a href="#">Privacy Policy</a>, and <a href="#">Credit Authorization</a>.</p>
+  </div>
+</div>
+
+<!-- Loading overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <p class="loading-text" id="loadingText">Looking you up...</p>
+  <p class="loading-sub" id="loadingSub">Searching our lending network</p>
+</div>
+
+<script>
+  var currentMethod = 'name';
+
+  function switchMethod(method) {
+    currentMethod = method;
+    document.getElementById('tabName').className = 'method-btn' + (method === 'name' ? ' active' : '');
+    document.getElementById('tabEmail').className = 'method-btn' + (method === 'email' ? ' active' : '');
+    document.getElementById('formName').className = 'form-section' + (method === 'name' ? ' active' : '');
+    document.getElementById('formEmail').className = 'form-section' + (method === 'email' ? ' active' : '');
+
+    // Focus first field
+    if (method === 'name') document.getElementById('fname').focus();
+    else document.getElementById('email').focus();
+
+    validate();
+  }
+
+  // Auto-advance DOB fields
+  function dobAdvance(el, nextId) {
+    el.value = el.value.replace(/\D/g, '');
+    if (el.value.length >= el.maxLength) {
+      document.getElementById(nextId).focus();
+    }
+  }
+
+  // Mark filled fields
+  function markFilled() {
+    var inputs = document.querySelectorAll('.field-input');
+    for (var i = 0; i < inputs.length; i++) {
+      if (inputs[i].value.trim()) inputs[i].classList.add('filled');
+      else inputs[i].classList.remove('filled');
+    }
+  }
+
+  function validate() {
+    markFilled();
+    var ok = false;
+
+    if (currentMethod === 'name') {
+      var fn = document.getElementById('fname').value.trim();
+      var ln = document.getElementById('lname').value.trim();
+      var mm = document.getElementById('dobMM').value.trim();
+      var dd = document.getElementById('dobDD').value.trim();
+      var yy = document.getElementById('dobYYYY').value.trim();
+      ok = fn.length >= 1 && ln.length >= 1 && mm.length === 2 && dd.length === 2 && yy.length === 4;
+
+      // Progress bar
+      var filled = (fn?1:0) + (ln?1:0) + (mm.length===2?1:0) + (dd.length===2?1:0) + (yy.length===4?1:0);
+      document.getElementById('progressFill').style.width = (15 + filled * 17) + '%';
+    } else {
+      var em = document.getElementById('email').value.trim();
+      var ssn = document.getElementById('ssn4').value.trim();
+      var emailOk = em.includes('@') && em.includes('.');
+      ok = emailOk && ssn.length === 4;
+
+      var filled = (emailOk?1:0) + (ssn.length===4?1:0);
+      document.getElementById('progressFill').style.width = (15 + filled * 42) + '%';
+    }
+
+    document.getElementById('ctaBtn').disabled = !ok;
+  }
+
+  function submitLookup() {
+    var overlay = document.getElementById('loadingOverlay');
+    overlay.classList.add('show');
+
+    var steps = [
+      { text: 'Looking you up...', sub: 'Searching our lending network', delay: 0 },
+      { text: 'Found your file!', sub: 'Checking available lenders', delay: 1500 },
+      { text: 'Almost ready...', sub: 'Preparing your options', delay: 2800 }
+    ];
+
+    steps.forEach(function(step) {
+      setTimeout(function() {
+        document.getElementById('loadingText').textContent = step.text;
+        document.getElementById('loadingSub').textContent = step.sub;
+      }, step.delay);
+    });
+
+    // After loading, redirect to the results page
+    setTimeout(function() {
+      // In production: post data to backend, get redirect URL
+      // For preview, go to the wonderful-news page
+      window.location.href = '../wonderful-news/';
+    }, 4000);
+  }
+
+  // Auto-focus first field on load
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() { document.getElementById('fname').focus(); }, 300);
+  });
+</script>
+</body>
+</html>

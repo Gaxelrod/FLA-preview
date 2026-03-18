@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fast Loan Advance — Personal Loans Up To $5,000</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-700: #1b5e20;
+      --green-600: #2e7d32;
+      --green-500: #3a9e3f;
+      --green-400: #66bb6a;
+      --green-50: #f0faf0;
+      --gray-900: #111;
+      --gray-700: #333;
+      --gray-600: #555;
+      --gray-400: #999;
+      --gray-300: #ccc;
+      --gray-200: #e5e5e5;
+      --gray-100: #f5f5f5;
+      --gray-50: #fafafa;
+      --white: #fff;
+      --radius: 14px;
+      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { height: 100%; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--gray-50);
+      color: var(--gray-900);
+      min-height: 100%;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ── Top bar ── */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .logo-mark { display: inline-flex; align-items: center; gap: 1px; }
+    .logo-word {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--gray-900);
+      letter-spacing: 0.5px;
+    }
+    .logo-sub {
+      font-size: 7px; font-weight: 500; color: var(--gray-400);
+      letter-spacing: 3.5px; text-transform: uppercase;
+      text-align: center; display: block; margin-top: -1px;
+    }
+    .top-stat {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 600; color: var(--green-600);
+      background: var(--green-50); padding: 5px 10px; border-radius: 20px;
+    }
+    .top-stat .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green-500); animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    /* ── Main wrapper — mobile: single col, desktop: split ── */
+    .main {
+      background: var(--white);
+    }
+
+    /* ── Hero section (contains text + image on desktop) ── */
+    .hero-section {
+      padding: 28px 20px 0;
+    }
+
+    .hero-image-mobile {
+      display: block;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .hero-image-mobile img {
+      width: 220px;
+      height: auto;
+      border-radius: 20px;
+    }
+    .hero-image-desktop {
+      display: none;
+    }
+
+    .hero-text { text-align: center; }
+    .hero-text h1 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--gray-900);
+      margin-bottom: 12px;
+    }
+    .hero-text h1 .highlight { color: var(--green-600); }
+    .hero-text .hero-sub {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.55;
+      margin-bottom: 20px;
+    }
+
+    /* ── Bullet points ── */
+    .hero-bullets {
+      list-style: none;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .hero-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 6px 0;
+      font-size: 14px;
+      color: var(--gray-700);
+      line-height: 1.4;
+    }
+    .hero-bullets li svg {
+      flex-shrink: 0;
+      color: var(--green-500);
+      margin-top: 2px;
+    }
+
+    /* ── Social proof bar ── */
+    .proof-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .proof-bar-center { justify-content: center; }
+    .proof-faces { display: flex; }
+    .proof-face {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 2px solid var(--white); margin-left: -8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--white);
+    }
+    .proof-face:first-child { margin-left: 0; }
+    .proof-face.f1 { background: #5b9bd5; }
+    .proof-face.f2 { background: #ed7d31; }
+    .proof-face.f3 { background: #70ad47; }
+    .proof-face.f4 { background: #ffc000; color: var(--gray-700); }
+    .proof-face.f5 { background: var(--gray-300); color: var(--gray-700); font-size: 9px; }
+    .proof-text { font-size: 13px; color: var(--gray-600); line-height: 1.3; }
+    .proof-text strong { color: var(--gray-900); }
+
+    /* ── CTA ── */
+    .cta-area { margin-bottom: 20px; }
+    .cta-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; height: 56px;
+      background: var(--green-500); color: var(--white);
+      font-family: var(--font-body); font-size: 17px; font-weight: 700;
+      border: none; border-radius: var(--radius); cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.1s;
+      box-shadow: 0 4px 16px rgba(58,158,63,0.3);
+    }
+    .cta-btn:hover { background: var(--green-600); }
+    .cta-btn:active { transform: scale(0.985); }
+    .cta-note {
+      text-align: center; font-size: 12px;
+      color: var(--gray-400); margin-top: 8px;
+    }
+
+    .hero-section-footer {
+      padding: 0 20px 24px;
+    }
+
+    /* ── Benefits ── */
+    .benefits-section {
+      padding: 0 20px 24px;
+    }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .benefit {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .benefit:last-child { border-bottom: none; }
+    .benefit-icon {
+      flex-shrink: 0; width: 36px; height: 36px; border-radius: 10px;
+      background: var(--green-50); color: var(--green-600);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .benefit-text h3 { font-size: 14px; font-weight: 700; color: var(--gray-900); margin-bottom: 2px; }
+    .benefit-text p { font-size: 13px; color: var(--gray-600); line-height: 1.4; }
+
+    /* ── Stats ── */
+    .stats-strip {
+      display: flex;
+      background: var(--gray-50);
+      border-top: 1px solid var(--gray-100);
+      border-bottom: 1px solid var(--gray-100);
+      margin-bottom: 20px;
+    }
+    .stat-item { flex: 1; text-align: center; padding: 14px 8px; }
+    .stat-item + .stat-item { border-left: 1px solid var(--gray-100); }
+    .stat-num {
+      font-family: var(--font-display); font-size: 22px; font-weight: 700;
+      color: var(--green-600); line-height: 1; margin-bottom: 3px;
+    }
+    .stat-label {
+      font-size: 10px; font-weight: 600; color: var(--gray-400);
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    /* ── Bottom CTA ── */
+    .bottom-cta { padding: 0 20px 8px; }
+    .bottom-cta .cta-btn { height: 52px; font-size: 16px; }
+
+    /* ── Trust ── */
+    .trust-footer { padding: 16px 20px; text-align: center; }
+    .trust-row {
+      display: flex; justify-content: center; gap: 16px; margin-bottom: 10px;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 10px; font-weight: 600; color: var(--gray-400); letter-spacing: 0.2px;
+    }
+    .trust-item svg { color: var(--gray-300); }
+
+    /* ── Legal ── */
+    .legal-footer {
+      font-size: 10px; color: var(--gray-400); line-height: 1.6;
+      text-align: left; padding: 12px 20px 24px;
+    }
+    .legal-footer a { color: var(--gray-600); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ═══════════════════════════════
+       DESKTOP (768px+)
+    ═══════════════════════════════ */
+    @media (min-width: 768px) {
+      .top-bar {
+        padding: 14px 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+        border-bottom: 1px solid var(--gray-100);
+      }
+      .logo-word { font-size: 20px; }
+      .logo-sub { font-size: 8px; letter-spacing: 4.5px; }
+      .top-stat { font-size: 12px; padding: 6px 14px; }
+
+      .main {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .hero-section {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        padding: 48px 40px 0;
+        min-height: 420px;
+      }
+
+      .hero-col-text {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .hero-text {
+        text-align: left;
+      }
+      .hero-text h1 {
+        font-size: 40px;
+        margin-bottom: 16px;
+      }
+      .hero-text .hero-sub {
+        font-size: 17px;
+        max-width: 440px;
+        margin-bottom: 24px;
+      }
+
+      .hero-bullets li {
+        font-size: 15px;
+        padding: 7px 0;
+      }
+
+      .proof-bar { justify-content: flex-start; }
+
+      .cta-area .cta-btn {
+        width: 320px;
+        height: 58px;
+        font-size: 18px;
+      }
+      .cta-note { text-align: left; }
+
+      .hero-image-mobile { display: none; }
+      .hero-image-desktop {
+        display: block;
+        flex: 0 0 380px;
+      }
+      .hero-image-desktop img {
+        width: 100%;
+        height: auto;
+        border-radius: 24px;
+        display: block;
+      }
+
+      .hero-section-footer {
+        padding: 0 40px 32px;
+      }
+
+      /* Benefits as 2x2 grid */
+      .benefits-section {
+        padding: 0 40px 32px;
+      }
+      .benefits-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0 32px;
+      }
+      .benefit { padding: 14px 0; }
+
+      /* Stats wider */
+      .stats-strip { margin-bottom: 24px; }
+      .stat-item { padding: 20px 12px; }
+      .stat-num { font-size: 28px; }
+      .stat-label { font-size: 11px; }
+
+      .bottom-cta {
+        padding: 0 40px 12px;
+      }
+      .bottom-cta .cta-btn {
+        width: 360px;
+        margin: 0 auto;
+        height: 56px;
+        font-size: 17px;
+      }
+
+      .trust-footer { padding: 20px 40px; }
+      .trust-item { font-size: 11px; gap: 5px; }
+
+      .legal-footer {
+        max-width: 700px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 16px 40px 32px;
+      }
+    }
+
+    /* ── Large desktop (1024px+) ── */
+    @media (min-width: 1024px) {
+      .hero-section {
+        gap: 60px;
+        padding: 56px 60px 0;
+      }
+      .hero-text h1 { font-size: 46px; }
+      .hero-image-desktop { flex: 0 0 440px; }
+      .benefits-section { padding: 0 60px 40px; }
+      .bottom-cta { padding: 0 60px 16px; }
+      .hero-section-footer { padding: 0 60px 40px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cta-btn:active { transform: none; }
+      .top-stat .dot { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <div>
+      <div class="logo-mark">
+        <span class="logo-word">FAST</span>
+        <svg width="18" height="22" viewBox="0 0 30 36" fill="none" aria-hidden="true">
+          <path d="M15 2C8 8 4 16 6 26C8 22 11 18 15 16C19 18 22 22 24 26C26 16 22 8 15 2Z" fill="#3a9e3f" stroke="#2e7d32" stroke-width="1"/>
+          <line x1="15" y1="16" x2="15" y2="34" stroke="#2e7d32" stroke-width="2"/>
+        </svg>
+        <span class="logo-word">LOAN</span>
+      </div>
+      <span class="logo-sub">ADVANCE</span>
+    </div>
+    <div class="top-stat">
+      <span class="dot"></span>
+      2,471 approved today
+    </div>
+  </div>
+
+  <div class="main">
+
+    <!-- Hero section — stacked on mobile, side-by-side on desktop -->
+    <div class="hero-section">
+      <div class="hero-col-text">
+
+        <!-- Image on mobile only (above headline) -->
+        <div class="hero-image-mobile">
+          <img src="hero-image.png" alt="Happy customer with laptop" width="220" height="293">
+        </div>
+
+        <div class="hero-text">
+          <h1>You're <span class="highlight">one step</span> away from your loan</h1>
+          <p class="hero-sub">Every day, thousands of people just like you get connected with lenders through our network. It takes about 2 minutes.</p>
+        </div>
+
+        <!-- Bullet points -->
+        <ul class="hero-bullets">
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M6 9.2l2 2 4-4.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            APR from <strong>5.99%</strong> up to <strong>35.99%</strong> for qualified borrowers
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M6 9.2l2 2 4-4.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            91-day minimum up to <strong>72-month</strong> repayment
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M6 9.2l2 2 4-4.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Funds as soon as the <strong>next business day</strong>
+          </li>
+        </ul>
+
+        <!-- Social proof -->
+        <div class="proof-bar proof-bar-center">
+          <div class="proof-faces">
+            <div class="proof-face f1">M</div>
+            <div class="proof-face f2">J</div>
+            <div class="proof-face f3">S</div>
+            <div class="proof-face f4">K</div>
+            <div class="proof-face f5">+</div>
+          </div>
+          <p class="proof-text"><strong>9 out of 10</strong> applicants get matched</p>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-area">
+          <a href="index.html" class="cta-btn">
+            Get Started — It's Free
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5m-4.5-4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <p class="cta-note">No fees. No obligation. No credit score impact.</p>
+        </div>
+      </div>
+
+      <!-- Image on desktop only (right side) -->
+      <div class="hero-image-desktop">
+        <img src="hero-image.png" alt="Happy customer with laptop" width="440" height="587">
+      </div>
+    </div>
+
+    <!-- Disclosure link (mobile) -->
+    <div class="hero-section-footer">
+      <p style="text-align:center;font-size:12px;color:var(--gray-400)"><a href="#" style="color:var(--gray-600);text-decoration:underline;text-underline-offset:2px">Disclosures</a></p>
+    </div>
+
+    <!-- Benefits -->
+    <div class="benefits-section">
+      <div class="benefits-grid">
+        <div class="benefit">
+          <div class="benefit-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M9 5v4l2.5 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="benefit-text">
+            <h3>Funds as soon as next business day</h3>
+            <p>Once approved, money can be in your account fast.</p>
+          </div>
+        </div>
+        <div class="benefit">
+          <div class="benefit-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2.5" y="4.5" width="13" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 8h13" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <div class="benefit-text">
+            <h3>Loans from $100 to $5,000</h3>
+            <p>Borrow what you need — no more, no less.</p>
+          </div>
+        </div>
+        <div class="benefit">
+          <div class="benefit-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2l2 4h4.5l-3.5 2.5 1.25 4.5L9 10.5 4.75 13l1.25-4.5L2.5 6H7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="benefit-text">
+            <h3>All credit types welcome</h3>
+            <p>Bad credit, fair credit, no credit — our lenders work with everyone.</p>
+          </div>
+        </div>
+        <div class="benefit">
+          <div class="benefit-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="3" y="7" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M6 7V5a3 3 0 016 0v2" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <div class="benefit-text">
+            <h3>Safe and secure</h3>
+            <p>256-bit encryption protects your info. We never sell your data.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-strip">
+      <div class="stat-item">
+        <div class="stat-num">2M+</div>
+        <div class="stat-label">Requests</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100+</div>
+        <div class="stat-label">Lenders</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">~2min</div>
+        <div class="stat-label">To apply</div>
+      </div>
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="bottom-cta">
+      <a href="index.html" class="cta-btn">
+        Check My Options
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3.75 9h10.5m-4.5-4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <!-- Trust -->
+    <div class="trust-footer">
+      <div class="trust-row">
+        <span class="trust-item">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="2" y="6" width="12" height="8" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 6V4.5a3 3 0 016 0V6" stroke="currentColor" stroke-width="1.2"/></svg>
+          256-bit SSL
+        </span>
+        <span class="trust-item">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M5 8.2l2 2 4-4.4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          No credit impact
+        </span>
+        <span class="trust-item">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 1.5l1.5 3h3.5l-2.75 2 1 3.5L8 8l-3.25 2 1-3.5L3 4.5h3.5z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          Free to use
+        </span>
+      </div>
+    </div>
+
+    <!-- Legal -->
+    <p class="legal-footer">APR ranges from 5.99% up to 35.99% for qualified borrowers. Repayment terms from 91 days to 72 months. Fast Loan Advance is not a lender and does not make credit decisions. By submitting your request, you agree to our <a href="#">Terms & Conditions</a>, <a href="#">Privacy Policy</a>, and <a href="#">Credit Authorization</a>. Checking your rate does not affect your credit score. <a href="#">Disclosures</a></p>
+
+  </div>
+</body>
+</html>
